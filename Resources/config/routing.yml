@@ -2,4 +2,8 @@ tonish_blog_blog:
     resource: "@TonishBlogBundle/Resources/config/routing/blog.yml"
     prefix:   /blog
 
+home_blog:
+    resource: "@TonishBlogBundle/Resources/config/routing/home.yml"
+    prefix:   /home
+
 

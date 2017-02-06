@@ -1,0 +1,26 @@
+{% dump(blogs) %}
+<table class="footable table table-striped table-bordered default">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Titolo</th>
+        <th>contenuto</th>
+        <th>Azioni</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for blog in blogs %}
+        <tr>
+            <td><a href="{{ path('blog_show', { 'id': blog.id }) }}">{{ blog.id }}</a></td>
+            <td>{{ blog.title }}</td>
+            <td>{{ blog.content }}</td>
+            <td>
+                <div>
+                    <a class="btn btn-info" href="{{ path('blog_show', { 'id': blog.id }) }}">Mostra</a>
+                    <a class="btn btn-primary" href="{{ path('blog_edit', { 'id': blog.id }) }}">Modifica</a>
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

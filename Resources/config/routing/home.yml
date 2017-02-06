@@ -1,0 +1,9 @@
+home_index:
+    path:     /
+    defaults: { _controller: "TonishBlogBundle:Homepage:index" }
+    methods:  GET
+
+home_search:
+    path:     /search
+    defaults: { _controller: "TonishBlogBundle:Homepage:search" }
+    methods:  POST

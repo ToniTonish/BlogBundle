@@ -59,7 +59,7 @@ class BlogController extends Controller
     {
         $deleteForm = $this->createDeleteForm($blog);
 
-        return $this->render('blog/show.html.twig', array(
+        return $this->render('@TonishBlog/blog/show.html.twig', array(
             'blog' => $blog,
             'delete_form' => $deleteForm->createView(),
         ));
