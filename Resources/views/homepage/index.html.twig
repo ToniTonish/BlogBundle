@@ -47,7 +47,7 @@
                         word: searchWord
                     },
                     success: function (response) {
-                        $(document).find('.elastic-results').append(response);
+                        $(document).find('.elastic-results').html(response);
                     }
 
                 });
