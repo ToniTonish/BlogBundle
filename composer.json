@@ -1,0 +1,25 @@
+{
+  "name" : "tonish/Blog",
+  "description" : "Example bundle for blog with ElasticSearch",
+  "type" : "symfony-bundle",
+  "authors" : [{
+    "name" : "Tonish",
+    "email" : "antonino.buscetta@gmail.com"
+  }
+  ],
+  "keywords" : [
+    "Blog"
+  ],
+  "license" : "Unknown",
+  "autoload" : {
+    "psr-0" : {
+      "Tonish\\BlogBundle" : ""
+    }
+  },
+  "target-dir" : "Tonish/BlogBundle",
+  "extra" : {
+    "branch-alias" : {
+      "dev-master" : "master"
+    }
+  }
+}
