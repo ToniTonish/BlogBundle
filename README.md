@@ -6,7 +6,12 @@ This example has some dependencies from:
 > "symfony/assetic-bundle": "^2.8",<br>
 > "friendsofsymfony/elastica-bundle": "dev-master#6206199"
 
-we have to use ElasticaBundle "dev-master#6206199" for a bug in the last version. 
+we have to use ElasticaBundle "dev-master#6206199" for a bug in the last version.
+ 
+then enable these bundles in the AppKernel: 
+
+> new Symfony\Bundle\AsseticBundle\AsseticBundle()<br>
+> new FOS\ElasticaBundle\FOSElasticaBundle()
 
 Add the distro in composer require:
 ----------------------------------
