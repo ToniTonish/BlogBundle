@@ -1,0 +1,55 @@
+{% if body_class is not defined %}
+    {% set body_class = "skin-blue sidebar-mini" %}
+{% endif %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    {% if title is not defined %}{% set title = "" %}{% endif %}
+    <title>{{ title }}</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    {% block stylesheets %}
+        {% stylesheets
+        'bundles/tonishblog/bootstrap/css/bootstrap.min.css'
+        'bundles/tonishblog/dist/css/AdminLTE.css'
+        'bundles/tonishblog/dist/css/skins/skin-blue.css'
+        'bundles/tonishblog/plugins/font-awesome-4.7.0/css/font-awesome.min.css'
+        'bundles/tonishblog/plugins/select2/select2.min.css'
+        filter='cssrewrite'
+        output='compiled/css/tonish-admin-base.css'
+        %}
+        <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+        {% endstylesheets %}
+
+    {% endblock stylesheets %}
+
+    {% block javascript_head %}
+        {% javascripts
+        'bundles/tonishblog/plugins/html5shiv/html5shiv.js'
+        'bundles/tonishblog/plugins/modernizr/modernizr.2.8.3.js'
+        'bundles/tonishblog/plugins/jQuery/jQuery-2.2.0.min.js'
+        output='compiled/js/admin-base.js'
+        %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endblock javascript_head %}
+
+</head>
+<body class="{{ body_class }}">
+{% block layout %}
+{% endblock layout %}
+
+{% block javascripts %}
+    {% javascripts
+    'bundles/tonishblog/bootstrap/js/bootstrap.min.js'
+    'bundles/tonishblog/dist/js/app.min.js'
+    output='compiled/js/goictlabs-admin-base-backend.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock javascripts %}
+</body>
+</html>

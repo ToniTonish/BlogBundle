@@ -1,41 +1,49 @@
-{% extends 'base.html.twig' %}
+{% extends '@TonishBlog/BaseLayout/layout.html.twig' %}
 
-{% block body %}
-    <h1>Blogs list</h1>
+{% block sidebar %}
+    <li class="active"><a href="{{ path('blog_index') }}"><i class="fa fa-user-circle"></i> <span>Articoli</span></a></li>
+{% endblock sidebar %}
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Content</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for blog in blogs %}
-            <tr>
-                <td><a href="{{ path('blog_show', { 'id': blog.id }) }}">{{ blog.id }}</a></td>
-                <td>{{ blog.title }}</td>
-                <td>{{ blog.content }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('blog_show', { 'id': blog.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('blog_edit', { 'id': blog.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+{% block content_title %}
+    <h1>About Us
+        <a class="btn btn-success" href="{{ path('blog_new') }}">Crea Articolo</a>
+    </h1>
+{% endblock %}
 
-    <ul>
-        <li>
-            <a href="{{ path('blog_new') }}">Create a new blog</a>
-        </li>
-    </ul>
+{% block content %}
+    <div class="widget">
+        <div class="widget-body bg-white">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-body">
+                        <table class="footable table table-striped table-bordered default">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Titolo</th>
+                                <th>contenuto</th>
+                                <th>Azioni</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for blog in blogs %}
+                                <tr>
+                                    <td><a href="{{ path('blog_show', { 'id': blog.id }) }}">{{ blog.id }}</a></td>
+                                    <td>{{ blog.title }}</td>
+                                    <td>{{ blog.content }}</td>
+                                    <td>
+                                        <div>
+                                            <a class="btn btn-info" href="{{ path('blog_show', { 'id': blog.id }) }}">Mostra</a>
+                                            <a class="btn btn-primary" href="{{ path('blog_edit', { 'id': blog.id }) }}">Modifica</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

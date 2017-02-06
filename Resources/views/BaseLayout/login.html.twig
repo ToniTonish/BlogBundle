@@ -1,0 +1,45 @@
+{% extends 'TonishAdminLTEBundle:BaseLayout:base.html.twig' %}
+
+{% set body_class = "login-page" %}
+{% block layout %}
+    <div class="login-box">
+    	
+      <div class="login-logo">
+        	{% block brand %}<a href="#">Amministrazione</a>{% endblock %}
+      </div>
+      <div class="login-box-body">
+        <p class="login-box-msg">Inserisci i dati di accesso</p>
+        <form role="form" action="{{ path("fos_user_security_check") }}" method="post">
+        	<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+        	{% if error %}
+    			<div class="alert alert-danger login-error">I dati inseriti non sono validi</div>
+			{% endif %}
+          <div class="form-group has-feedback">
+            <input type="text" class="form-control" id="username" placeholder="Utente" name="_username" value="{{ last_username }}" required autofocus>
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+          </div>
+          <div class="form-group has-feedback">
+            <input type="password" class="form-control" id="password" placeholder="Password" name="_password" required>
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+          </div>
+          <div class="row">
+            <div class="col-xs-8">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" id="remember_me" name="_remember_me" value="on">Ricordami {# Remember my details #}
+                </label>
+              </div>
+            </div><!-- /.col -->
+            <div class="col-xs-4">
+              <button type="submit" class="btn btn-primary btn-block btn-flat" id="_submit" name="_submit">Login</button>
+            </div><!-- /.col -->
+          </div>
+        </form>
+
+        <a href="{{ path('fos_user_resetting_request') }}">Password dimenticata?</a><br>
+
+      </div><!-- /.login-box-body -->
+    </div><!-- /.login-box -->
+
+
+{% endblock layout %}

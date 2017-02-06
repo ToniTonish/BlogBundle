@@ -1,0 +1,357 @@
+{% extends '@TonishAdminLTE/BaseLayout/base.html.twig' %}
+
+{% if body_class is not defined %}
+    {% set body_class = "skin-blue sidebar-mini" %}
+{% endif %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets
+    'bundles/tonishblog/plugins/jvectormap/jquery-jvectormap-1.2.2.css'
+    filter='cssrewrite'
+    output='compiled/css/admin-layout.css'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+    {% endstylesheets %}
+    <!-- Ionicons -->
+    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+{% endblock stylesheets %}
+
+{% block layout %}
+    <div class="wrapper">
+
+        <header class="main-header">
+
+            {% block logo %}
+                <a href="#" class="logo">
+                    {#<!-- mini logo for sidebar mini 50x50 pixels -->
+                    <span class="logo-mini"> <img src="{{asset('bundles/advapp/images/adv-small.png') }}" alt="Adv"></span>
+                    <!-- logo for regular state and mobile devices -->
+                    <span class="logo-lg"><img src="{{asset('bundles/advapp/images/adv.png') }}" alt="Adv"></span>#}
+                </a>
+            {% endblock %}
+
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                <!-- Navbar Right Menu -->
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="{{asset('bundles/tonishblog/img/user.png') }}" alt="user" class="user-image">
+                                <span class="hidden-xs">{{ app.user }}</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header">
+                                    <img src="{{asset('bundles/tonishblog/img/user.png') }}" alt="user" class="img-circle">
+                                    <p>
+                                        {{ app.user }}
+                                        <!-- <small>Member since Nov. 2012</small> -->
+                                    </p>
+                                </li>
+                                <!-- Menu Body -->
+                                <!-- <li class="user-body">
+                                  <div class="col-xs-4 text-center">
+                                    <a href="#">Followers</a>
+                                  </div>
+                                  <div class="col-xs-4 text-center">
+                                    <a href="#">Sales</a>
+                                  </div>
+                                  <div class="col-xs-4 text-center">
+                                    <a href="#">Friends</a>
+                                  </div>
+                                </li> -->
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        {#
+                                        {% if app.user and app.user.getSoggetto() == null %}
+                                            <a href="{{ path("admin_profile") }}#" class="btn btn-default btn-flat">Profilo</a>
+                                        {% else %}
+                                          <a href="{{ path("soggetto_profile") }}" class="btn btn-default btn-flat">Profilo</a>
+                                        {% endif %}
+                                        #}
+                                    </div>
+                                    <div class="pull-right">
+                                        {#<a href="{% block logout_path %}{{ path("fos_user_security_logout") }}{% endblock %}" class="btn btn-default btn-flat">Esci</a>#}
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Control Sidebar Toggle Button -->
+                        <!--<li>
+                          <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                        </li> -->
+                    </ul>
+                </div>
+
+            </nav>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar user panel -->
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src="{{asset('bundles/tonishblog/img/user.png') }}" alt="user" class="img-circle">
+                    </div>
+                    <div class="pull-left info">
+                        <p>{{ app.user }}</p>
+                        {#	<a href="#"><i class="fa fa-circle text-success"></i> Validato</a>
+                            <a href="#"><i class="fa fa-circle text-danger"></i> Non validato</a>
+                            <a href="#"><i class="fa fa-circle text-success"></i> Admin</a> #}
+                    </div>
+                </div>
+                <!-- search form -->
+                {# <form action="#" method="get" class="sidebar-form">
+                   <div class="input-group">
+                     <input type="text" name="q" class="form-control" placeholder="Cerca..." />
+                     <span class="input-group-btn">
+                       <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+                     </span>
+                   </div>
+                 </form> #}
+                <!-- /.search form -->
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu">
+                    <li class="header">MENU</li>
+                    {#{% if active_menu is not defined %}#}
+                        {#{% set active_menu="" %}#}
+                    {#{% endif %}#}
+                    {#{{ knp_menu_render('backend_sidebar', {'template': 'GoICTLabsAdminLTEBundle:AdminLTE:sidebar_menu.html.twig'}) }}#}
+                    {% block sidebar %}{% endblock sidebar %}
+
+                    <!-- li class="active treeview">
+                      <a href="#">
+                        <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
+                      </a>
+                      <ul class="treeview-menu">
+                        <li><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+                        <li class="active"><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+                      </ul>
+                    </li -->
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                {% block flashmessages %}
+                    {% from '@TonishBlog/BaseLayout/macro.html.twig' import advanced_flash %}
+                    {% for flashMessage in app.session.flashbag.get('crud_error') %}
+                        {{ advanced_flash('danger', 'Attenzione', flashMessage|trans, true, false, null, 'BlogBundle') }}
+                    {% endfor %}
+                    {% for flashMessage in app.session.flashbag.get('success_message') %}
+                        {{ advanced_flash('success', 'Conferma operazione', flashMessage|trans, true, false, null, 'BlogBundle') }}
+                    {% endfor %}
+                    {% for flashMessage in app.session.flashbag.get('info') %}
+                        {{ advanced_flash('success', 'Conferma operazione', flashMessage|trans, true, false, null, 'BlogBundle') }}
+                    {% endfor %}
+                {% endblock flashmessages %}
+
+                {% block content_title %}{% endblock content_title %}
+
+
+                {% block breadcrumbs %}
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li class="active">Dashboard</li>
+                    </ol>
+                {% endblock %}
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    {% block content %}{% endblock content %}
+                </div>
+            </section><!-- /.content -->
+        </div><!-- /.content-wrapper -->
+
+        {% block footer %}
+            <footer class="main-footer">
+                <!-- div class="pull-right hidden-xs">
+                  <b>Version</b> 2.2.0
+                </div -->
+                <strong>Copyright &copy; {{ 'now'|date('Y') }} {% block link_ditta %}<a href="http://www.google.it">[ DITTA ]</a>{% endblock link_ditta %}.</strong> Tutti i diritti riservati.
+            </footer>
+        {% endblock footer %}
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Create the tabs -->
+            <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+                <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+                <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <!-- Home tab content -->
+                <div class="tab-pane" id="control-sidebar-home-tab">
+                    <h3 class="control-sidebar-heading">Recent Activity</h3>
+                    <ul class="control-sidebar-menu">
+                        <li>
+                            <a href="javascript::;">
+                                <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+                                <div class="menu-info">
+                                    <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+                                    <p>Will be 23 on April 24th</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript::;">
+                                <i class="menu-icon fa fa-user bg-yellow"></i>
+                                <div class="menu-info">
+                                    <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
+                                    <p>New phone +1(800)555-1234</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript::;">
+                                <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
+                                <div class="menu-info">
+                                    <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
+                                    <p>nora@example.com</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript::;">
+                                <i class="menu-icon fa fa-file-code-o bg-green"></i>
+                                <div class="menu-info">
+                                    <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
+                                    <p>Execution time 5 seconds</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul><!-- /.control-sidebar-menu -->
+
+                    <h3 class="control-sidebar-heading">Tasks Progress</h3>
+                    <ul class="control-sidebar-menu">
+                        <li>
+                            <a href="javascript::;">
+                                <h4 class="control-sidebar-subheading">
+                                    Custom Template Design
+                                    <span class="label label-danger pull-right">70%</span>
+                                </h4>
+                                <div class="progress progress-xxs">
+                                    <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript::;">
+                                <h4 class="control-sidebar-subheading">
+                                    Update Resume
+                                    <span class="label label-success pull-right">95%</span>
+                                </h4>
+                                <div class="progress progress-xxs">
+                                    <div class="progress-bar progress-bar-success" style="width: 95%"></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript::;">
+                                <h4 class="control-sidebar-subheading">
+                                    Laravel Integration
+                                    <span class="label label-warning pull-right">50%</span>
+                                </h4>
+                                <div class="progress progress-xxs">
+                                    <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript::;">
+                                <h4 class="control-sidebar-subheading">
+                                    Back End Framework
+                                    <span class="label label-primary pull-right">68%</span>
+                                </h4>
+                                <div class="progress progress-xxs">
+                                    <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul><!-- /.control-sidebar-menu -->
+
+                </div><!-- /.tab-pane -->
+
+                <!-- Settings tab content -->
+                <div class="tab-pane" id="control-sidebar-settings-tab">
+                    <form method="post">
+                        <h3 class="control-sidebar-heading">General Settings</h3>
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                Report panel usage
+                                <input type="checkbox" class="pull-right" checked />
+                            </label>
+                            <p>
+                                Some information about this general settings option
+                            </p>
+                        </div><!-- /.form-group -->
+
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                Allow mail redirect
+                                <input type="checkbox" class="pull-right" checked />
+                            </label>
+                            <p>
+                                Other sets of options are available
+                            </p>
+                        </div><!-- /.form-group -->
+
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                Expose author name in posts
+                                <input type="checkbox" class="pull-right" checked />
+                            </label>
+                            <p>
+                                Allow the user to show his name in blog posts
+                            </p>
+                        </div><!-- /.form-group -->
+
+                        <h3 class="control-sidebar-heading">Chat Settings</h3>
+
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                Show me as online
+                                <input type="checkbox" class="pull-right" checked />
+                            </label>
+                        </div><!-- /.form-group -->
+
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                Turn off notifications
+                                <input type="checkbox" class="pull-right" />
+                            </label>
+                        </div><!-- /.form-group -->
+
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                Delete chat history
+                                <a href="javascript::;" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
+                            </label>
+                        </div><!-- /.form-group -->
+                    </form>
+                </div><!-- /.tab-pane -->
+            </div>
+        </aside><!-- /.control-sidebar -->
+        <!-- Add the sidebar's background. This div must be placed
+             immediately after the control sidebar -->
+        <div class="control-sidebar-bg"></div>
+
+    </div><!-- ./wrapper -->
+{% endblock layout %}
